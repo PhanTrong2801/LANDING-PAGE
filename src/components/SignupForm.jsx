@@ -13,13 +13,20 @@ export default function SignupForm() {
       return;
     }
     
-    // KẾT NỐI DỮ LIỆU RA BÊN NGOÀI: Gọi API/Webhook
+    // KẾT NỐI DỮ LIỆU RA BÊN NGOÀI: Gọi Database nội bộ (Vercel KV)
     try {
-      await fetch('https://jsonplaceholder.typicode.com/posts', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'NovaVision Pre-order' }),
+        body: JSON.stringify({ email }),
       });
+      
+      if (response.status === 409) {
+        setStatus('duplicate');
+        return;
+      }
+      
+      if (!response.ok) throw new Error("Server error");
       
       setStatus('success');
       setEmail('');
@@ -49,6 +56,7 @@ export default function SignupForm() {
           </form>
           
           {status === 'success' && <p className={styles.success}>🎉 Chúc mừng bạn đã đăng ký thành công!</p>}
+          {status === 'duplicate' && <p className={styles.error}>⚠️ Email này đã được đăng ký trước đó.</p>}
           {status === 'error' && <p className={styles.error}>⚠️ Vui lòng nhập địa chỉ email hợp lệ.</p>}
         </div>
       </div>
