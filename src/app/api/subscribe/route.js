@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { createClient } from '@vercel/kv';
 
 export async function POST(request) {
   try {
@@ -8,23 +8,25 @@ export async function POST(request) {
       return Response.json({ error: "Email không hợp lệ." }, { status: 400 });
     }
 
-    // Nếu chưa cấu hình KV trên Vercel, giả lập thành công để không lỗi web
-    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
-      console.warn("⚠️ Vercel KV chưa được cấu hình. Giả lập đăng ký thành công.");
+    const apiUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+    const apiToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+    if (!apiUrl || !apiToken) {
+      console.warn("⚠️ Vercel KV / Upstash chưa được cấu hình. Giả lập đăng ký thành công.");
       return Response.json({ message: "Giả lập đăng ký thành công!" });
     }
 
+    const db = createClient({ url: apiUrl, token: apiToken });
+
     // Thêm email vào tập hợp (Set) 'subscribers'. 
-    // Tập hợp (Set) sẽ tự động loại bỏ các email trùng lặp.
-    const isAdded = await kv.sadd('subscribers', email);
+    const isAdded = await db.sadd('subscribers', email);
 
     if (isAdded === 0) {
-      // 0 nghĩa là email này đã tồn tại trong Set
       return Response.json({ error: "Email này đã được đăng ký trước đó." }, { status: 409 });
     }
 
     // Ghi lại mốc thời gian đăng ký (Tùy chọn)
-    await kv.hset(`user:${email}`, { 
+    await db.hset(`user:${email}`, { 
       registeredAt: new Date().toISOString(),
       source: 'NovaVision Pre-order'
     });
