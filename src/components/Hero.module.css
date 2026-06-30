@@ -1,9 +1,25 @@
 .hero {
-  padding: var(--spacing-xl) 0;
+  position: relative;
   min-height: 80vh;
   display: flex;
   align-items: center;
+  overflow: hidden;
+}
+
+.parallaxBg {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  right: 0;
+  bottom: -20%;
   background: radial-gradient(circle at top right, var(--gradient-start) 0%, var(--bg-color) 60%);
+  z-index: 0;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .heroContent {

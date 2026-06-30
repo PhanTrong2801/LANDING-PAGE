@@ -1,11 +1,17 @@
 "use client";
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   return (
-    <section className={styles.hero}>
-      <div className="container">
+    <section ref={ref} className={styles.hero}>
+      <motion.div className={styles.parallaxBg} style={{ y: yBg }} />
+      <div className={`container ${styles.contentWrapper}`}>
         <motion.div 
           className={styles.heroContent}
           initial={{ opacity: 0, y: 30 }}
