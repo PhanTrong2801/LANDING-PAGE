@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Trang Chủ | Next.js Landing Page",
-  description: "Dự án về Website tốc độ cao và chuẩn SEO",
+  title: "NovaVision Pro | Kính thực tế ảo của tương lai",
+  description: "Trải nghiệm ranh giới mới của thị giác với NovaVision Pro. Màn hình Micro-OLED 4K, theo dõi mắt thông minh và AI tích hợp.",
 };
 
 export default function RootLayout({ children }) {

@@ -25,8 +25,8 @@ export default function SignupForm() {
     <section id="signup" className={styles.signupSection}>
       <div className="container">
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>Đăng Ký Nhận Tin</h2>
-          <p className={styles.desc}>Cập nhật những công nghệ và xu hướng mới nhất về Web/App.</p>
+          <h2 className={styles.title}>Đăng Ký Đặt Trước (Pre-order)</h2>
+          <p className={styles.desc}>Trở thành một trong 100 người đầu tiên sở hữu NovaVision Pro và nhận ưu đãi giảm giá 20%.</p>
           
           <form className={styles.form} onSubmit={handleSubmit}>
             <input 
@@ -37,7 +37,7 @@ export default function SignupForm() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit" className={`btn-primary ${styles.submitBtn}`}>Đăng Ký</button>
+            <button type="submit" className={`btn-primary ${styles.submitBtn}`}>Đăng Ký Ưu Đãi</button>
           </form>
           
           {status === 'success' && <p className={styles.success}>🎉 Chúc mừng bạn đã đăng ký thành công!</p>}

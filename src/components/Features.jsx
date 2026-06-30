@@ -5,19 +5,19 @@ import styles from './Features.module.css';
 export default function Features() {
   const specs = [
     {
-      title: "Hiệu Năng Tối Đa",
-      desc: "PageSpeed luôn đạt > 85 điểm nhờ Server-Side Rendering và tối ưu tài nguyên tĩnh tự động.",
-      icon: "⚡"
+      title: "Micro-OLED 4K Kép",
+      desc: "Trải nghiệm hình ảnh sắc nét đến từng điểm ảnh với màn hình Micro-OLED độ phân giải 4K cho mỗi mắt.",
+      icon: "🖥️"
     },
     {
-      title: "SEO Tuyệt Đối",
-      desc: "Metadata API và Semantic HTML giúp bọ tìm kiếm Google đọc hiểu nội dung ngay lập tức.",
-      icon: "🔍"
+      title: "Theo Dõi Mắt Thông Minh",
+      desc: "Điều hướng toàn bộ giao diện chỉ bằng ánh nhìn. Camera hồng ngoại theo dõi chuyển động mắt với độ trễ gần bằng không.",
+      icon: "👁️"
     },
     {
-      title: "Khả Năng Mở Rộng",
-      desc: "Sẵn sàng tích hợp hệ thống thương mại điện tử mini hoặc Chatbot AI mà không lo nghẽn cổ chai.",
-      icon: "🚀"
+      title: "Trợ Lý AI Tích Hợp",
+      desc: "Trí tuệ nhân tạo phân tích môi trường xung quanh real-time, cung cấp thông tin trực quan ngay trước mắt bạn.",
+      icon: "🧠"
     }
   ];
 

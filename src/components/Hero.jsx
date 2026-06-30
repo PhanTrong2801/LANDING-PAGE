@@ -13,14 +13,14 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className={styles.title}>
-            Xây Dựng Website <span className={styles.highlight}>Tương Lai</span>
+            Mở Khóa Tầm Nhìn Với <span className={styles.highlight}>NovaVision Pro</span>
           </h1>
           <p className={styles.description}>
-            Trải nghiệm tốc độ tải trang cực nhanh, tối ưu điểm số SEO và giao diện hiện đại với công nghệ Next.js đỉnh cao.
+            Khám phá ranh giới mới của thị giác. Kính thực tế ảo tăng cường kết hợp trí tuệ nhân tạo, mang thế giới số hòa quyện vào đời thực của bạn.
           </p>
           <div className={styles.actions}>
-            <a href="#signup" className="btn-primary">Đăng Ký Trải Nghiệm</a>
-            <a href="#features" className={styles.btnSecondary}>Tìm Hiểu Thêm</a>
+            <a href="#signup" className="btn-primary">Đặt Trước Ngay</a>
+            <a href="#features" className={styles.btnSecondary}>Tính Năng Nổi Bật</a>
           </div>
         </motion.div>
       </div>
