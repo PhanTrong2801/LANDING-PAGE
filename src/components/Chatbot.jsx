@@ -20,7 +20,7 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
     
@@ -30,14 +30,25 @@ export default function Chatbot() {
     setInput("");
     setIsTyping(true);
 
-    // Auto reply
-    setTimeout(() => {
+    // Call Backend API
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+      const data = await response.json();
+      
+      if (data.reply) {
+        setMessages(prev => [...prev, { text: data.reply, isBot: true }]);
+      } else {
+        setMessages(prev => [...prev, { text: "Xin lỗi, máy chủ của tôi đang quá tải. Vui lòng thử lại sau.", isBot: true }]);
+      }
+    } catch (error) {
+      setMessages(prev => [...prev, { text: "Mất kết nối mạng. Xin vui lòng kiểm tra lại.", isBot: true }]);
+    } finally {
       setIsTyping(false);
-      setMessages(prev => [...prev, {
-        text: "Hiện tại NovaVision Pro đang có giá dự kiến là 499$. Số lượng cực kỳ có hạn, bạn hãy nhanh tay điền form đăng ký phía trên để giữ chỗ nhé!",
-        isBot: true
-      }]);
-    }, 1500);
+    }
   };
 
   return (
