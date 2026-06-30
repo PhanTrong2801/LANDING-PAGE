@@ -6,19 +6,27 @@ export default function SignupForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null); // 'success' | 'error' | null
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
       setStatus('error');
       return;
     }
-    // Giả lập call API/Webhook
-    setStatus('success');
-    setEmail('');
     
-    setTimeout(() => {
-      setStatus(null);
-    }, 3000);
+    // KẾT NỐI DỮ LIỆU RA BÊN NGOÀI: Gọi API/Webhook
+    try {
+      await fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'NovaVision Pre-order' }),
+      });
+      
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus(null), 3000);
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   return (
